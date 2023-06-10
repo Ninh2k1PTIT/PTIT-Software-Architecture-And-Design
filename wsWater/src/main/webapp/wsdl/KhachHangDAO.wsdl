@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://dao" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://dao" xmlns:intf="http://dao" xmlns:tns1="http://model" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://dao" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://model"/>
+   <element name="getCanHoByKhachHang">
+    <complexType>
+     <sequence>
+      <element name="khachHang" type="tns1:KhachHang"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getCanHoByKhachHangResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getCanHoByKhachHangReturn" type="tns1:CanHo"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getKhachHangByTen">
+    <complexType>
+     <sequence>
+      <element name="key" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getKhachHangByTenResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getKhachHangByTenReturn" type="tns1:KhachHang"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://model" xmlns="http://www.w3.org/2001/XMLSchema">
+   <complexType name="KhachHang">
+    <sequence>
+     <element name="id" nillable="true" type="xsd:int"/>
+     <element name="tenKhachHang" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="CanHo">
+    <sequence>
+     <element name="diaChi" nillable="true" type="xsd:string"/>
+     <element name="id" nillable="true" type="xsd:int"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="getCanHoByKhachHangRequest">
+
+      <wsdl:part element="impl:getCanHoByKhachHang" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getKhachHangByTenRequest">
+
+      <wsdl:part element="impl:getKhachHangByTen" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getCanHoByKhachHangResponse">
+
+      <wsdl:part element="impl:getCanHoByKhachHangResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getKhachHangByTenResponse">
+
+      <wsdl:part element="impl:getKhachHangByTenResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="KhachHangDAO">
+
+      <wsdl:operation name="getCanHoByKhachHang">
+
+         <wsdl:input message="impl:getCanHoByKhachHangRequest" name="getCanHoByKhachHangRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getCanHoByKhachHangResponse" name="getCanHoByKhachHangResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getKhachHangByTen">
+
+         <wsdl:input message="impl:getKhachHangByTenRequest" name="getKhachHangByTenRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getKhachHangByTenResponse" name="getKhachHangByTenResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="KhachHangDAOSoapBinding" type="impl:KhachHangDAO">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="getCanHoByKhachHang">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getCanHoByKhachHangRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getCanHoByKhachHangResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getKhachHangByTen">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getKhachHangByTenRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getKhachHangByTenResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="KhachHangDAOService">
+
+      <wsdl:port binding="impl:KhachHangDAOSoapBinding" name="KhachHangDAO">
+
+         <wsdlsoap:address location="http://localhost:8080/wsWater/services/KhachHangDAO"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from UserDAOService WSDL service -->
+
+  <service name="UserDAO" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://dao"/>
+      <parameter name="wsdlServiceElement" value="UserDAOService"/>
+      <parameter name="schemaQualified" value="http://dao,http://model"/>
+      <parameter name="wsdlServicePort" value="UserDAO"/>
+      <parameter name="className" value="dao.UserDAO"/>
+      <parameter name="wsdlPortType" value="UserDAO"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:operNS="http://dao" xmlns:retNS="http://dao" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="login" qname="operNS:login" returnQName="retNS:loginReturn" returnType="rtns:boolean" soapAction="">
+        <parameter xmlns:pns="http://dao" xmlns:tns="http://model" qname="pns:user" type="tns:User"/>
+      </operation>
+      <parameter name="allowedMethods" value="login"/>
+
+      <typeMapping xmlns:ns="http://model" qname="ns:User" type="java:model.User" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+  </service>
+</deployment>

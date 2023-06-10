@@ -1,0 +1,37 @@
+<nz-breadcrumb>
+    <nz-breadcrumb-item>Khách hàng</nz-breadcrumb-item>
+    <nz-breadcrumb-item>Căn hộ</nz-breadcrumb-item>
+    <nz-breadcrumb-item>Dịch vụ sử dụng</nz-breadcrumb-item>
+</nz-breadcrumb>
+<div class="inner-content">
+    <div class="d-flex justify-content-end">
+        <button nz-button nzType="default" class="mb-2" routerLink="../../">
+            Quay lại
+        </button>
+    </div>
+    <nz-table #editRowTable nzBordered [nzData]="data">
+        <thead>
+            <tr>
+                <th nzWidth="25%">Mã</th>
+                <th nzWidth="50%">Tên dịch vụ</th>
+                <th class="text-center">Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of editRowTable.data" class="editable-row">
+                <td>
+                    {{ data.id }}
+                </td>
+                <td>
+                    {{ data.tenDichVu }}
+                </td>
+                <td class="text-center">
+                    <button nz-button nzType="primary" nz-tooltip nzTooltipTitle="Hóa đơn"
+                        [routerLink]="data.id + '/bill'">
+                        <span nz-icon nzType="file-sync"></span>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </nz-table>
+</div>

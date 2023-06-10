@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from KhachHangDAOService WSDL service -->
+
+  <service name="KhachHangDAO" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://dao"/>
+      <parameter name="wsdlServiceElement" value="KhachHangDAOService"/>
+      <parameter name="schemaQualified" value="http://dao,http://model"/>
+      <parameter name="wsdlServicePort" value="KhachHangDAO"/>
+      <parameter name="className" value="dao.KhachHangDAO"/>
+      <parameter name="wsdlPortType" value="KhachHangDAO"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:operNS="http://dao" xmlns:retNS="http://dao" xmlns:rtns="http://model" name="getCanHoByKhachHang" qname="operNS:getCanHoByKhachHang" returnQName="retNS:getCanHoByKhachHangReturn" returnType="rtns:CanHo" soapAction="">
+        <parameter xmlns:pns="http://dao" xmlns:tns="http://model" qname="pns:khachHang" type="tns:KhachHang"/>
+      </operation>
+      <operation xmlns:operNS="http://dao" xmlns:retNS="http://dao" xmlns:rtns="http://model" name="getKhachHangByTen" qname="operNS:getKhachHangByTen" returnQName="retNS:getKhachHangByTenReturn" returnType="rtns:KhachHang" soapAction="">
+        <parameter xmlns:pns="http://dao" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:key" type="tns:string"/>
+      </operation>
+      <parameter name="allowedMethods" value="getKhachHangByTen getCanHoByKhachHang"/>
+
+      <typeMapping xmlns:ns="http://model" qname="ns:KhachHang" type="java:model.KhachHang" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://model" qname="ns:CanHo" type="java:model.CanHo" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+  </service>
+</deployment>

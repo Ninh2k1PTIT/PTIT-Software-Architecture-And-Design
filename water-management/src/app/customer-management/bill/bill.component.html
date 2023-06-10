@@ -1,0 +1,166 @@
+<nz-breadcrumb>
+  <nz-breadcrumb-item>Khách hàng</nz-breadcrumb-item>
+  <nz-breadcrumb-item>Căn hộ</nz-breadcrumb-item>
+  <nz-breadcrumb-item>Dịch vụ sử dụng</nz-breadcrumb-item>
+  <nz-breadcrumb-item>Hóa đơn</nz-breadcrumb-item>
+</nz-breadcrumb>
+<div class="inner-content">
+  <div class="d-flex justify-content-between">
+    <button nz-button nzType="primary" class="mb-2" (click)="showModalNew()">
+      Lập hóa đơn
+    </button>
+    <button nz-button nzType="default" class="mb-2" routerLink="../../">
+      Quay lại
+    </button>
+  </div>
+  <nz-table #editRowTable nzBordered [nzData]="listOfData">
+    <thead>
+      <tr>
+        <th>Mã</th>
+        <th>Ngày tạo</th>
+        <th>Chỉ số đồng hồ</th>
+        <th>Chỉ số tiêu thụ (m3)</th>
+        <th>Số tiền (VNĐ)</th>
+        <th>Đã thanh toán (VNĐ)</th>
+        <th class="text-center">Hành động</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of editRowTable.data" class="editable-row">
+        <td>
+          {{ data.id }}
+        </td>
+        <td>
+          {{ data.ngayTao | date : "dd/MM/yyyy" }}
+        </td>
+        <td>
+          {{ data.chiSoDongHo }}
+        </td>
+        <td>
+          {{ data.chiSoTieuThu }}
+        </td>
+        <td>
+          {{ data.soTien }}
+        </td>
+        <td>
+          {{ data.soTienDaThanhToan }}
+        </td>
+        <td class="text-center">
+          <button class="mr-1" nz-button nzType="primary" nz-tooltip nzTooltipTitle="Thanh toán"
+            (click)="showModalPayment(data.id)" [disabled]="data.soTien - data.soTienDaThanhToan <= 0">
+            <span nz-icon nzType="dollar-circle"></span>
+          </button>
+          <button nz-button nzType="primary" nz-tooltip nzTooltipTitle="Xem thêm"
+            (click)="showModalDetail(data)">
+            <span nz-icon nzType="more"></span>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>
+
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Thông tin hóa đơn mới" [nzWidth]="1000" [nzClosable]="true"
+  [nzOkText]="'Lưu'" [nzCancelText]="'Đóng'" (nzOnCancel)="handleCancel()" (nzOnOk)="submit()">
+  <div *nzModalContent>
+    <form class="mb-1" [formGroup]="form">
+      <div class="row">
+        <fieldset class="form-group col-6">
+          <label>Số ghi đồng hồ kì trước</label>
+          <input nz-input formControlName="chiSoKiTruoc" />
+        </fieldset>
+        <fieldset class="form-group col-6">
+          <label>Ngày ghi</label>
+          <input nz-input formControlName="ngayTaoKiTruoc" />
+        </fieldset>
+      </div>
+      <div class="row">
+        <fieldset class="form-group col-6">
+          <label>Số ghi đồng hồ kì này</label>
+          <input nz-input formControlName="chiSoDongHo"
+            [ngStyle]=" {'border-color': (form.controls['chiSoDongHo'].errors?.['required'] && (form.controls['chiSoDongHo'].touched || submitted)) ? '#ff4d4f' : '' }" />
+          <span nz-typography nzType="danger"
+            *ngIf="form.controls['chiSoDongHo'].errors?.['required'] && (form.controls['chiSoDongHo'].touched || submitted)">Trường
+            này không được bỏ trống</span>
+        </fieldset>
+        <fieldset class="form-group col-6">
+          <label>Ngày ghi</label>
+          <input nz-input formControlName="ngayTao" />
+        </fieldset>
+      </div>
+    </form>
+  </div>
+</nz-modal>
+
+<nz-modal [(nzVisible)]="isVisiblePayment" nzTitle="Thanh toán hóa đơn" (nzOnCancel)="handleCancel()"
+  [nzClosable]="false" [nzOkText]="null">
+  <div *nzModalContent>
+    <nz-input-number [(ngModel)]="cash" [nzMin]="0" [nzStep]="1" [nzPrecision]="0" class="w-100"></nz-input-number>
+    <button nz-button nzType="primary" class="mt-2 w-100" (click)="cashPayment()">
+      Thanh toán
+    </button>
+    <div class="text-center m-1">Hoặc</div>
+    <button nz-button nzType="primary" class="mt-2 w-100" (click)="vnPayPayment()">
+      Thanh toán với
+      <img width="60px" class="ml-1" src="https://vnpay.vn/assets/images/logo-icon/logo-primary.svg" alt="" />
+    </button>
+  </div>
+</nz-modal>
+
+<nz-modal [(nzVisible)]="isVisibleDetail" nzTitle="Chi tiết hóa đơn" (nzOnCancel)="handleCancel()" [nzWidth]="1000"
+  [nzClosable]="false" [nzOkText]="null" [nzCancelText]="'Đóng'">
+  <div *nzModalContent>
+    <nz-tabset>
+      <nz-tab nzTitle="Lịch sử thanh toán">
+        <span class="mr-3">Số tiền: {{soTien}} VNĐ</span>
+        <span>Đã thanh toán: {{daThanhToan}} VNĐ</span>
+        <nz-table #basicTable [nzData]="listPayment" [nzPageSize]="5">
+          <thead>
+            <tr>
+              <th>Mã</th>
+              <th>Ngày thanh toán</th>
+              <th>Số tiền (VNĐ)</th>
+              <th>Phương thức thanh toán</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of basicTable.data">
+              <td>{{ data.id._text }}</td>
+              <td>{{ data.ngayThanhToan._text | date : "dd/MM/yyyy" }}</td>
+              <td>{{ data.soTien._text }}</td>
+              <td>{{ data.phuongThucThanhToan._text }}</td>
+            </tr>
+          </tbody>
+        </nz-table></nz-tab>
+      <nz-tab nzTitle="Bảng giá áp dụng">
+        <span class="mr-3">Số nước tiêu thụ: {{soNuoc}} m3</span>
+        <span>Số tiền: {{soTien}} VNĐ</span>
+        <nz-table #editRowTable2 nzBordered [nzData]="listOfMucLuyTien" [nzScroll]="{ y: '250px' }"
+          nzShowPagination="false">
+          <thead>
+            <tr>
+              <th>Mức nước bắt đầu (m3)</th>
+              <th>Đơn giá (VNĐ/m3)</th>
+              <th>Tiêu thụ (m3)</th>
+              <th>Số tiền (VNĐ)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of editRowTable2.data" class="editable-row">
+              <td>
+                {{ data.mucLuyTien.gioiHan }}
+              </td>
+              <td>
+                {{ data.mucLuyTien.donGia }}
+              </td>
+              <td>
+                {{ data.chiSoTieuThu }}
+              </td>
+              <td>
+                {{ data.soTien }}
+              </td>
+            </tr>
+          </tbody>
+        </nz-table></nz-tab></nz-tabset>
+  </div>
+</nz-modal>

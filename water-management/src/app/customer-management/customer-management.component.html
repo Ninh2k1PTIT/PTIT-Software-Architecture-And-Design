@@ -1,0 +1,51 @@
+<nz-breadcrumb>
+  <nz-breadcrumb-item>Khách hàng</nz-breadcrumb-item>
+  <nz-breadcrumb-item>Tìm kiếm</nz-breadcrumb-item>
+</nz-breadcrumb>
+<div class="inner-content">
+  <div class="text-center">
+    <nz-input-group [nzSuffix]="suffixIconSearch" class="w-50">
+      <input
+        type="text"
+        nz-input
+        placeholder="Nhập tên khách hàng"
+        (input)="onSearchQueryInput($event)"
+      />
+    </nz-input-group>
+    <ng-template #suffixIconSearch>
+      <span nz-icon nzType="search"></span>
+    </ng-template>
+  </div>
+  <br />
+  <br />
+  <nz-table #editRowTable nzBordered [nzData]="listOfData">
+    <thead>
+      <tr>
+        <th nzWidth="25%">Mã</th>
+        <th nzWidth="50%">Tên khách hàng</th>
+        <th class="text-center">Hành động</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of editRowTable.data" class="editable-row">
+        <td>
+          {{ data.id }}
+        </td>
+        <td>
+          {{ data.tenKhachHang }}
+        </td>
+        <td class="text-center">
+          <button
+            nz-button
+            nzType="primary"
+            nz-tooltip
+            nzTooltipTitle="Căn hộ"
+            [routerLink]="data.id + '/apartment'"
+          >
+            <span nz-icon nzType="home"></span>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>

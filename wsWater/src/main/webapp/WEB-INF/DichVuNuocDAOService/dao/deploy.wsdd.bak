@@ -1,0 +1,103 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from DichVuNuocDAOService WSDL service -->
+
+  <service name="DichVuNuocDAO" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://dao"/>
+      <parameter name="wsdlServiceElement" value="DichVuNuocDAOService"/>
+      <parameter name="schemaQualified" value="http://dao,http://model"/>
+      <parameter name="wsdlServicePort" value="DichVuNuocDAO"/>
+      <parameter name="className" value="dao.DichVuNuocDAOSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="DichVuNuocDAO"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="getAllDichVu" qname="operNS:getAllDichVu" xmlns:operNS="http://dao" returnQName="retNS:getAllDichVuReturn" xmlns:retNS="http://dao" returnType="rtns:DichVuNuoc" xmlns:rtns="http://model" soapAction="" >
+      </operation>
+      <operation name="saveBangGia" qname="operNS:saveBangGia" xmlns:operNS="http://dao" returnQName="retNS:saveBangGiaReturn" xmlns:retNS="http://dao" returnType="rtns:long" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:bangGia" xmlns:pns="http://dao" type="tns:BangGia" xmlns:tns="http://model"/>
+      </operation>
+      <operation name="createDichVu" qname="operNS:createDichVu" xmlns:operNS="http://dao" returnQName="retNS:createDichVuReturn" xmlns:retNS="http://dao" returnType="rtns:long" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:dichVu" xmlns:pns="http://dao" type="tns:DichVuNuoc" xmlns:tns="http://model"/>
+      </operation>
+      <operation name="getDichVu" qname="operNS:getDichVu" xmlns:operNS="http://dao" returnQName="retNS:getDichVuReturn" xmlns:retNS="http://dao" returnType="rtns:DichVuNuoc" xmlns:rtns="http://model" soapAction="" >
+        <parameter qname="pns:dichVuNuoc" xmlns:pns="http://dao" type="tns:DichVuNuoc" xmlns:tns="http://model"/>
+      </operation>
+      <operation name="updateDichVu" qname="operNS:updateDichVu" xmlns:operNS="http://dao" returnQName="retNS:updateDichVuReturn" xmlns:retNS="http://dao" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:dichVu" xmlns:pns="http://dao" type="tns:DichVuNuoc" xmlns:tns="http://model"/>
+      </operation>
+      <operation name="saveMucLuyTiens" qname="operNS:saveMucLuyTiens" xmlns:operNS="http://dao" returnQName="retNS:saveMucLuyTiensReturn" xmlns:retNS="http://dao" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:mucLuyTiens" xmlns:pns="http://dao" type="tns:MucLuyTien" xmlns:tns="http://model"/>
+      </operation>
+      <operation name="getDichVuByCanHo" qname="operNS:getDichVuByCanHo" xmlns:operNS="http://dao" returnQName="retNS:getDichVuByCanHoReturn" xmlns:retNS="http://dao" returnType="rtns:DichVuHopDong" xmlns:rtns="http://model" soapAction="" >
+        <parameter qname="pns:canHo" xmlns:pns="http://dao" type="tns:CanHo" xmlns:tns="http://model"/>
+      </operation>
+      <operation name="getAllMucLuyTienByBangGia" qname="operNS:getAllMucLuyTienByBangGia" xmlns:operNS="http://dao" returnQName="retNS:getAllMucLuyTienByBangGiaReturn" xmlns:retNS="http://dao" returnType="rtns:MucLuyTien" xmlns:rtns="http://model" soapAction="" >
+        <parameter qname="pns:bangGia" xmlns:pns="http://dao" type="tns:BangGia" xmlns:tns="http://model"/>
+      </operation>
+      <operation name="getAllBangGiaByDichVu" qname="operNS:getAllBangGiaByDichVu" xmlns:operNS="http://dao" returnQName="retNS:getAllBangGiaByDichVuReturn" xmlns:retNS="http://dao" returnType="rtns:BangGia" xmlns:rtns="http://model" soapAction="" >
+        <parameter qname="pns:dichVu" xmlns:pns="http://dao" type="tns:DichVuNuoc" xmlns:tns="http://model"/>
+      </operation>
+      <operation name="getLatestBangGiaByDichVu" qname="operNS:getLatestBangGiaByDichVu" xmlns:operNS="http://dao" returnQName="retNS:getLatestBangGiaByDichVuReturn" xmlns:retNS="http://dao" returnType="rtns:BangGia" xmlns:rtns="http://model" soapAction="" >
+        <parameter qname="pns:dichVu" xmlns:pns="http://dao" type="tns:DichVuNuoc" xmlns:tns="http://model"/>
+      </operation>
+      <parameter name="allowedMethods" value="getLatestBangGiaByDichVu getAllMucLuyTienByBangGia saveMucLuyTiens updateDichVu createDichVu saveBangGia getDichVuByCanHo getAllBangGiaByDichVu getDichVu getAllDichVu"/>
+
+      <typeMapping
+        xmlns:ns="http://model"
+        qname="ns:DichVuNuoc"
+        type="java:model.DichVuNuoc"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model"
+        qname="ns:MucLuyTien"
+        type="java:model.MucLuyTien"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model"
+        qname="ns:HopDong"
+        type="java:model.HopDong"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model"
+        qname="ns:CanHo"
+        type="java:model.CanHo"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model"
+        qname="ns:DichVuHopDong"
+        type="java:model.DichVuHopDong"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model"
+        qname="ns:BangGia"
+        type="java:model.BangGia"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+  </service>
+</deployment>

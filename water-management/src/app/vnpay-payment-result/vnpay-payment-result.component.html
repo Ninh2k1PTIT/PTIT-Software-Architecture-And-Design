@@ -1,0 +1,18 @@
+<nz-breadcrumb> </nz-breadcrumb>
+<div class="inner-content">
+  <nz-spin
+    *ngIf="loading"
+    nzSimple
+    class="text-center"
+    style="margin: 20%"
+    nzSize="large"
+  ></nz-spin>
+  <div class="text-center">
+    <img [src]="results.images" width="100px" alt="" />
+    <h2>{{ results.status }}</h2>
+    <h5>Mã hóa đơn: {{ results.billId }}</h5>
+    <h5>Mã giao dịch: {{ results.transactionNo }}</h5>
+    <h5>Số tiền thanh toán: {{ results.amount }}</h5>
+    <button nz-button nzType="primary" (click)="back()">Quay lại</button>
+  </div>
+</div>

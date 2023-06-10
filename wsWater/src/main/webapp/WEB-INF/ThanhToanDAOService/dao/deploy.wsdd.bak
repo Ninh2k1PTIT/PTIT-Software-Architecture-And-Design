@@ -1,0 +1,100 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from ThanhToanDAOService WSDL service -->
+
+  <service name="ThanhToanDAO" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://dao"/>
+      <parameter name="wsdlServiceElement" value="ThanhToanDAOService"/>
+      <parameter name="schemaQualified" value="http://dao,http://model"/>
+      <parameter name="wsdlServicePort" value="ThanhToanDAO"/>
+      <parameter name="className" value="dao.ThanhToanDAOSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="ThanhToanDAO"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="createThanhToanTienMat" qname="operNS:createThanhToanTienMat" xmlns:operNS="http://dao" returnQName="retNS:createThanhToanTienMatReturn" xmlns:retNS="http://dao" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:thanhToan" xmlns:pns="http://dao" type="tns:ThanhToan" xmlns:tns="http://model"/>
+      </operation>
+      <operation name="getSoTienChuaThanhToan" qname="operNS:getSoTienChuaThanhToan" xmlns:operNS="http://dao" returnQName="retNS:getSoTienChuaThanhToanReturn" xmlns:retNS="http://dao" returnType="rtns:int" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:hoaDon" xmlns:pns="http://dao" type="tns:HoaDon" xmlns:tns="http://model"/>
+      </operation>
+      <operation name="createThanhToanVnPay" qname="operNS:createThanhToanVnPay" xmlns:operNS="http://dao" returnQName="retNS:createThanhToanVnPayReturn" xmlns:retNS="http://dao" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:thanhToan" xmlns:pns="http://dao" type="tns:ThanhToan" xmlns:tns="http://model"/>
+      </operation>
+      <operation name="getByHoaDon" qname="operNS:getByHoaDon" xmlns:operNS="http://dao" returnQName="retNS:getByHoaDonReturn" xmlns:retNS="http://dao" returnType="rtns:ThanhToan" xmlns:rtns="http://model" soapAction="" >
+        <parameter qname="pns:hoaDon" xmlns:pns="http://dao" type="tns:HoaDon" xmlns:tns="http://model"/>
+      </operation>
+      <operation name="getUrlVnPay" qname="operNS:getUrlVnPay" xmlns:operNS="http://dao" returnQName="retNS:getUrlVnPayReturn" xmlns:retNS="http://dao" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:hoaDon" xmlns:pns="http://dao" type="tns:HoaDon" xmlns:tns="http://model"/>
+      </operation>
+      <operation name="getSoTienDaThanhToan" qname="operNS:getSoTienDaThanhToan" xmlns:operNS="http://dao" returnQName="retNS:getSoTienDaThanhToanReturn" xmlns:retNS="http://dao" returnType="rtns:int" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:hoaDon" xmlns:pns="http://dao" type="tns:HoaDon" xmlns:tns="http://model"/>
+      </operation>
+      <parameter name="allowedMethods" value="createThanhToanVnPay getByHoaDon getUrlVnPay getSoTienChuaThanhToan createThanhToanTienMat getSoTienDaThanhToan"/>
+
+      <typeMapping
+        xmlns:ns="http://model"
+        qname="ns:DichVuNuoc"
+        type="java:model.DichVuNuoc"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model"
+        qname="ns:DichVuHopDong"
+        type="java:model.DichVuHopDong"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model"
+        qname="ns:HoaDon"
+        type="java:model.HoaDon"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model"
+        qname="ns:ThanhToan"
+        type="java:model.ThanhToan"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model"
+        qname="ns:BangGia"
+        type="java:model.BangGia"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model"
+        qname="ns:HopDong"
+        type="java:model.HopDong"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model"
+        qname="ns:PhuongThucThanhToan"
+        type="java:model.PhuongThucThanhToan"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+  </service>
+</deployment>

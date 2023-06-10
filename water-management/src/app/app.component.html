@@ -1,0 +1,27 @@
+<nz-layout class="layout">
+  <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
+    <div class="logo"></div>
+    <ul nz-menu nzTheme="dark" nzMode="inline">
+      <li nz-menu-item routerLink="/customer-management" [nzMatchRouter]="true" routerLinkActive="active">
+        <i nz-icon nzType="team"></i>
+        <span>Khách hàng</span>
+      </li>
+      <li nz-menu-item routerLink="/service-management" [nzMatchRouter]="true" routerLinkActive="active">
+        <i nz-icon nzType="setting"></i>
+        <span>Dịch vụ nước sạch</span>
+      </li>
+    </ul>
+  </nz-sider>
+  <nz-layout>
+    <nz-header>
+      <div class="d-flex justify-content-between">
+        <i class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+          (click)="isCollapsed = !isCollapsed"></i>
+      </div>
+    </nz-header>
+    <nz-content>
+      <router-outlet></router-outlet>
+    </nz-content>
+    <nz-footer>©2023 Hệ thống Quản lý dịch vụ nước sạch</nz-footer>
+  </nz-layout>
+</nz-layout>

@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://dao" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://dao" xmlns:intf="http://dao" xmlns:tns1="http://model" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://dao" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://model"/>
+   <element name="getHoaDonByDichVuHopDong">
+    <complexType>
+     <sequence>
+      <element name="dichVuHopDong" type="tns1:DichVuHopDong"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getHoaDonByDichVuHopDongResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getHoaDonByDichVuHopDongReturn" type="tns1:HoaDon"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getChiTietHoaDon">
+    <complexType>
+     <sequence>
+      <element name="hoaDon" type="tns1:HoaDon"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getChiTietHoaDonResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getChiTietHoaDonReturn" type="tns1:MucLuyTienHoaDon"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getLatestHoaDonByDichVuHopDong">
+    <complexType>
+     <sequence>
+      <element name="dichVuHopDong" type="tns1:DichVuHopDong"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getLatestHoaDonByDichVuHopDongResponse">
+    <complexType>
+     <sequence>
+      <element name="getLatestHoaDonByDichVuHopDongReturn" type="tns1:HoaDon"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createHoaDon">
+    <complexType>
+     <sequence>
+      <element name="hoaDon" type="tns1:HoaDon"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createHoaDonResponse">
+    <complexType>
+     <sequence>
+      <element name="createHoaDonReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://model" xmlns="http://www.w3.org/2001/XMLSchema">
+   <complexType name="DichVuNuoc">
+    <sequence>
+     <element name="ghiChu" nillable="true" type="xsd:string"/>
+     <element name="id" nillable="true" type="xsd:int"/>
+     <element name="ngayTao" nillable="true" type="xsd:dateTime"/>
+     <element name="tenDichVu" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="HopDong">
+    <sequence>
+     <element name="denNgay" nillable="true" type="xsd:dateTime"/>
+     <element name="id" nillable="true" type="xsd:int"/>
+     <element name="tuNgay" nillable="true" type="xsd:dateTime"/>
+    </sequence>
+   </complexType>
+   <complexType name="DichVuHopDong">
+    <sequence>
+     <element name="dichVuNuoc" nillable="true" type="tns1:DichVuNuoc"/>
+     <element name="hopDong" nillable="true" type="tns1:HopDong"/>
+     <element name="id" nillable="true" type="xsd:int"/>
+    </sequence>
+   </complexType>
+   <complexType name="BangGia">
+    <sequence>
+     <element name="dichVu" nillable="true" type="tns1:DichVuNuoc"/>
+     <element name="id" nillable="true" type="xsd:int"/>
+     <element name="ngayTao" nillable="true" type="xsd:dateTime"/>
+    </sequence>
+   </complexType>
+   <complexType name="HoaDon">
+    <sequence>
+     <element name="bangGia" nillable="true" type="tns1:BangGia"/>
+     <element name="chiSoDongHo" nillable="true" type="xsd:int"/>
+     <element name="chiSoTieuThu" nillable="true" type="xsd:int"/>
+     <element name="dichVuHopDong" nillable="true" type="tns1:DichVuHopDong"/>
+     <element name="id" nillable="true" type="xsd:int"/>
+     <element name="ngayTao" nillable="true" type="xsd:dateTime"/>
+     <element name="soTien" nillable="true" type="xsd:int"/>
+     <element name="soTienDaThanhToan" nillable="true" type="xsd:int"/>
+    </sequence>
+   </complexType>
+   <complexType name="MucLuyTien">
+    <sequence>
+     <element name="bangGia" nillable="true" type="tns1:BangGia"/>
+     <element name="donGia" nillable="true" type="xsd:int"/>
+     <element name="ghiChu" nillable="true" type="xsd:string"/>
+     <element name="gioiHan" nillable="true" type="xsd:int"/>
+     <element name="id" nillable="true" type="xsd:int"/>
+    </sequence>
+   </complexType>
+   <complexType name="MucLuyTienHoaDon">
+    <sequence>
+     <element name="chiSoTieuThu" nillable="true" type="xsd:int"/>
+     <element name="hoaDon" nillable="true" type="tns1:HoaDon"/>
+     <element name="id" nillable="true" type="xsd:int"/>
+     <element name="mucLuyTien" nillable="true" type="tns1:MucLuyTien"/>
+     <element name="soTien" nillable="true" type="xsd:int"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="getHoaDonByDichVuHopDongResponse">
+
+      <wsdl:part element="impl:getHoaDonByDichVuHopDongResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getLatestHoaDonByDichVuHopDongRequest">
+
+      <wsdl:part element="impl:getLatestHoaDonByDichVuHopDong" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getHoaDonByDichVuHopDongRequest">
+
+      <wsdl:part element="impl:getHoaDonByDichVuHopDong" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="createHoaDonRequest">
+
+      <wsdl:part element="impl:createHoaDon" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getChiTietHoaDonRequest">
+
+      <wsdl:part element="impl:getChiTietHoaDon" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getChiTietHoaDonResponse">
+
+      <wsdl:part element="impl:getChiTietHoaDonResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="createHoaDonResponse">
+
+      <wsdl:part element="impl:createHoaDonResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getLatestHoaDonByDichVuHopDongResponse">
+
+      <wsdl:part element="impl:getLatestHoaDonByDichVuHopDongResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="HoaDonDAO">
+
+      <wsdl:operation name="getHoaDonByDichVuHopDong">
+
+         <wsdl:input message="impl:getHoaDonByDichVuHopDongRequest" name="getHoaDonByDichVuHopDongRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getHoaDonByDichVuHopDongResponse" name="getHoaDonByDichVuHopDongResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getChiTietHoaDon">
+
+         <wsdl:input message="impl:getChiTietHoaDonRequest" name="getChiTietHoaDonRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getChiTietHoaDonResponse" name="getChiTietHoaDonResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getLatestHoaDonByDichVuHopDong">
+
+         <wsdl:input message="impl:getLatestHoaDonByDichVuHopDongRequest" name="getLatestHoaDonByDichVuHopDongRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getLatestHoaDonByDichVuHopDongResponse" name="getLatestHoaDonByDichVuHopDongResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createHoaDon">
+
+         <wsdl:input message="impl:createHoaDonRequest" name="createHoaDonRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:createHoaDonResponse" name="createHoaDonResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="HoaDonDAOSoapBinding" type="impl:HoaDonDAO">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="getHoaDonByDichVuHopDong">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getHoaDonByDichVuHopDongRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getHoaDonByDichVuHopDongResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getChiTietHoaDon">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getChiTietHoaDonRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getChiTietHoaDonResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getLatestHoaDonByDichVuHopDong">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getLatestHoaDonByDichVuHopDongRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getLatestHoaDonByDichVuHopDongResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createHoaDon">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="createHoaDonRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="createHoaDonResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="HoaDonDAOService">
+
+      <wsdl:port binding="impl:HoaDonDAOSoapBinding" name="HoaDonDAO">
+
+         <wsdlsoap:address location="http://localhost:8080/wsWater/services/HoaDonDAO"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

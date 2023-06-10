@@ -1,0 +1,91 @@
+<nz-breadcrumb>
+  <nz-breadcrumb-item>Dịch vụ nước sạch</nz-breadcrumb-item>
+  <nz-breadcrumb-item>Tạo mới</nz-breadcrumb-item>
+</nz-breadcrumb>
+<div class="inner-content">
+  <form class="mb-1" [formGroup]="form">
+    <fieldset class="form-group">
+      <label> Tên dịch vụ (bắt buộc)</label>
+      <input
+        nz-input
+        formControlName="tenDichVu"
+        [ngStyle]=" {'border-color': (form.controls['tenDichVu'].errors?.['required'] && (form.controls['tenDichVu'].touched || submitted)) ? '#ff4d4f' : '' }"
+      />
+      <span
+        nz-typography
+        nzType="danger"
+        *ngIf="form.controls['tenDichVu'].errors?.['required'] && (form.controls['tenDichVu'].touched || submitted)"
+        >Trường này không được bỏ trống</span
+      >
+    </fieldset>
+    <fieldset class="form-group">
+      <label>Ghi chú</label>
+      <textarea rows="3" nz-input formControlName="ghiChu"></textarea>
+    </fieldset>
+  </form>
+  <button nz-button (click)="addRow()" nzType="primary">Thêm mức giá</button>
+  <br />
+  <br />
+  <nz-table
+    #editRowTable
+    nzBordered
+    [nzData]="listOfData"
+    [nzScroll]="{ y: '250px' }"
+    nzShowPagination="false"
+  >
+    <thead>
+      <tr>
+        <th nzWidth="18%">Mức nước bắt đầu (m3)</th>
+        <th nzWidth="18%">Đơn giá (VNĐ/m3)</th>
+        <th nzWidth="50%">Ghi chú</th>
+        <th class="text-center">Hành động</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of editRowTable.data" class="editable-row">
+        <td>
+          <nz-input-number
+            [(ngModel)]="data.gioiHan"
+            [nzMin]="0"
+            [nzStep]="1"
+            nz-input
+            (nzBlur)="data.gioiHan = numberFilter(data.gioiHan)"
+          ></nz-input-number>
+        </td>
+        <td>
+          <nz-input-number
+            [(ngModel)]="data.donGia"
+            [nzMin]="0"
+            [nzStep]="1"
+            nz-input
+            (nzBlur)="data.donGia = numberFilter(data.donGia)"
+          ></nz-input-number>
+        </td>
+        <td>
+          <textarea rows="1" [(ngModel)]="data.ghiChu" nz-input></textarea>
+        </td>
+        <td class="text-center">
+          <button
+            nz-button
+            nzType="primary"
+            nzDanger
+            (click)="deleteRow(data.id)"
+            nz-tooltip
+            nzTooltipTitle="Xóa"
+          >
+            <span nz-icon nzType="delete"></span>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+  <br />
+  <div class="d-flex justify-content-end">
+    <button nz-button (click)="submit()" nzType="primary" class="mr-1">
+      Lưu
+    </button>
+    <button nz-button routerLink="/service-management" nzType="default" nz>
+      Quay lại
+    </button>
+  </div>
+</div>

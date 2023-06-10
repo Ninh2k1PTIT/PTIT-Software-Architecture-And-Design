@@ -1,0 +1,192 @@
+<ns1:deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java" xmlns:ns1="http://xml.apache.org/axis/wsdd/">
+ <ns1:globalConfiguration>
+  <ns1:parameter name="sendMultiRefs" value="true"/>
+  <ns1:parameter name="disablePrettyXML" value="true"/>
+  <ns1:parameter name="adminPassword" value="admin"/>
+  <ns1:parameter name="attachments.Directory" value="E:\eclipse-workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\wsWater\WEB-INF\attachments"/>
+  <ns1:parameter name="dotNetSoapEncFix" value="true"/>
+  <ns1:parameter name="enableNamespacePrefixOptimization" value="false"/>
+  <ns1:parameter name="sendXMLDeclaration" value="true"/>
+  <ns1:parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
+  <ns1:parameter name="sendXsiTypes" value="true"/>
+  <ns1:requestFlow>
+   <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
+    <ns1:parameter name="scope" value="session"/>
+   </ns1:handler>
+   <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
+    <ns1:parameter name="scope" value="request"/>
+    <ns1:parameter name="extension" value=".jwr"/>
+   </ns1:handler>
+  </ns1:requestFlow>
+ </ns1:globalConfiguration>
+ <ns1:handler name="URLMapper" type="java:org.apache.axis.handlers.http.URLMapper"/>
+ <ns1:handler name="Authenticate" type="java:org.apache.axis.handlers.SimpleAuthenticationHandler"/>
+ <ns1:handler name="LocalResponder" type="java:org.apache.axis.transport.local.LocalResponder"/>
+ <ns1:service name="DichVuNuocDAO" provider="java:RPC" style="wrapped" use="literal">
+  <ns3:operation name="getAllDichVu" qname="ns1:getAllDichVu" returnQName="ns1:getAllDichVuReturn" returnType="ns2:DichVuNuoc" soapAction="" xmlns:ns1="http://dao" xmlns:ns2="http://model" xmlns:ns3="http://xml.apache.org/axis/wsdd/"/>
+  <ns1:operation name="saveBangGia" qname="ns3:saveBangGia" returnQName="ns3:saveBangGiaReturn" returnType="xsd:long" soapAction="" xmlns:ns3="http://dao" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns3:bangGia" type="ns4:BangGia" xmlns:ns4="http://model"/>
+  </ns1:operation>
+  <ns1:operation name="createDichVu" qname="ns5:createDichVu" returnQName="ns5:createDichVuReturn" returnType="xsd:long" soapAction="" xmlns:ns5="http://dao" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns5:dichVu" type="ns6:DichVuNuoc" xmlns:ns6="http://model"/>
+  </ns1:operation>
+  <ns1:operation name="getDichVu" qname="ns7:getDichVu" returnQName="ns7:getDichVuReturn" returnType="ns8:DichVuNuoc" soapAction="" xmlns:ns7="http://dao" xmlns:ns8="http://model">
+   <ns1:parameter qname="ns7:dichVuNuoc" type="ns8:DichVuNuoc"/>
+  </ns1:operation>
+  <ns1:operation name="updateDichVu" qname="ns9:updateDichVu" returnQName="ns9:updateDichVuReturn" returnType="xsd:boolean" soapAction="" xmlns:ns9="http://dao" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns9:dichVu" type="ns10:DichVuNuoc" xmlns:ns10="http://model"/>
+  </ns1:operation>
+  <ns1:operation name="saveMucLuyTiens" qname="ns11:saveMucLuyTiens" returnQName="ns11:saveMucLuyTiensReturn" returnType="xsd:boolean" soapAction="" xmlns:ns11="http://dao" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns11:mucLuyTiens" type="ns12:MucLuyTien" xmlns:ns12="http://model"/>
+  </ns1:operation>
+  <ns1:operation name="getDichVuByCanHo" qname="ns13:getDichVuByCanHo" returnQName="ns13:getDichVuByCanHoReturn" returnType="ns14:DichVuHopDong" soapAction="" xmlns:ns13="http://dao" xmlns:ns14="http://model">
+   <ns1:parameter qname="ns13:canHo" type="ns14:CanHo"/>
+  </ns1:operation>
+  <ns1:operation name="getAllMucLuyTienByBangGia" qname="ns15:getAllMucLuyTienByBangGia" returnQName="ns15:getAllMucLuyTienByBangGiaReturn" returnType="ns16:MucLuyTien" soapAction="" xmlns:ns15="http://dao" xmlns:ns16="http://model">
+   <ns1:parameter qname="ns15:bangGia" type="ns16:BangGia"/>
+  </ns1:operation>
+  <ns1:operation name="getAllBangGiaByDichVu" qname="ns17:getAllBangGiaByDichVu" returnQName="ns17:getAllBangGiaByDichVuReturn" returnType="ns18:BangGia" soapAction="" xmlns:ns17="http://dao" xmlns:ns18="http://model">
+   <ns1:parameter qname="ns17:dichVu" type="ns18:DichVuNuoc"/>
+  </ns1:operation>
+  <ns1:operation name="getLatestBangGiaByDichVu" qname="ns19:getLatestBangGiaByDichVu" returnQName="ns19:getLatestBangGiaByDichVuReturn" returnType="ns20:BangGia" soapAction="" xmlns:ns19="http://dao" xmlns:ns20="http://model">
+   <ns1:parameter qname="ns19:dichVu" type="ns20:DichVuNuoc"/>
+  </ns1:operation>
+  <ns1:parameter name="allowedMethods" value="getLatestBangGiaByDichVu getAllMucLuyTienByBangGia saveMucLuyTiens updateDichVu createDichVu saveBangGia getDichVuByCanHo getAllBangGiaByDichVu getDichVu getAllDichVu"/>
+  <ns1:parameter name="wsdlPortType" value="DichVuNuocDAO"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="schemaQualified" value="http://dao,http://model"/>
+  <ns1:parameter name="wsdlServicePort" value="DichVuNuocDAO"/>
+  <ns1:parameter name="className" value="dao.DichVuNuocDAO"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://dao"/>
+  <ns1:parameter name="wsdlServiceElement" value="DichVuNuocDAOService"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns21:DichVuNuoc" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:model.DichVuNuoc" xmlns:ns21="http://model"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns22:MucLuyTien" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:model.MucLuyTien" xmlns:ns22="http://model"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns23:HopDong" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:model.HopDong" xmlns:ns23="http://model"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns24:CanHo" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:model.CanHo" xmlns:ns24="http://model"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns25:DichVuHopDong" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:model.DichVuHopDong" xmlns:ns25="http://model"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns26:BangGia" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:model.BangGia" xmlns:ns26="http://model"/>
+ </ns1:service>
+ <ns1:service name="AdminService" provider="java:MSG">
+  <ns1:parameter name="allowedMethods" value="AdminService"/>
+  <ns1:parameter name="enableRemoteAdmin" value="false"/>
+  <ns1:parameter name="className" value="org.apache.axis.utils.Admin"/>
+  <ns1:namespace>http://xml.apache.org/axis/wsdd/</ns1:namespace>
+ </ns1:service>
+ <ns1:service name="UserDAO" provider="java:RPC" style="wrapped" use="literal">
+  <ns1:operation name="login" qname="ns27:login" returnQName="ns27:loginReturn" returnType="xsd:boolean" soapAction="" xmlns:ns27="http://dao" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns27:user" type="ns28:User" xmlns:ns28="http://model"/>
+  </ns1:operation>
+  <ns1:parameter name="allowedMethods" value="login"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="wsdlPortType" value="UserDAO"/>
+  <ns1:parameter name="className" value="dao.UserDAO"/>
+  <ns1:parameter name="wsdlServicePort" value="UserDAO"/>
+  <ns1:parameter name="schemaQualified" value="http://dao,http://model"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://dao"/>
+  <ns1:parameter name="wsdlServiceElement" value="UserDAOService"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns29:User" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:model.User" xmlns:ns29="http://model"/>
+ </ns1:service>
+ <ns1:service name="ThanhToanDAO" provider="java:RPC" style="wrapped" use="literal">
+  <ns1:operation name="createThanhToanTienMat" qname="ns30:createThanhToanTienMat" returnQName="ns30:createThanhToanTienMatReturn" returnType="xsd:boolean" soapAction="" xmlns:ns30="http://dao" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns30:thanhToan" type="ns31:ThanhToan" xmlns:ns31="http://model"/>
+  </ns1:operation>
+  <ns1:operation name="getSoTienChuaThanhToan" qname="ns32:getSoTienChuaThanhToan" returnQName="ns32:getSoTienChuaThanhToanReturn" returnType="xsd:int" soapAction="" xmlns:ns32="http://dao" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns32:hoaDon" type="ns33:HoaDon" xmlns:ns33="http://model"/>
+  </ns1:operation>
+  <ns1:operation name="createThanhToanVnPay" qname="ns34:createThanhToanVnPay" returnQName="ns34:createThanhToanVnPayReturn" returnType="xsd:boolean" soapAction="" xmlns:ns34="http://dao" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns34:thanhToan" type="ns35:ThanhToan" xmlns:ns35="http://model"/>
+  </ns1:operation>
+  <ns1:operation name="getByHoaDon" qname="ns36:getByHoaDon" returnQName="ns36:getByHoaDonReturn" returnType="ns37:ThanhToan" soapAction="" xmlns:ns36="http://dao" xmlns:ns37="http://model">
+   <ns1:parameter qname="ns36:hoaDon" type="ns37:HoaDon"/>
+  </ns1:operation>
+  <ns1:operation name="getUrlVnPay" qname="ns38:getUrlVnPay" returnQName="ns38:getUrlVnPayReturn" returnType="xsd:string" soapAction="" xmlns:ns38="http://dao" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns38:hoaDon" type="ns39:HoaDon" xmlns:ns39="http://model"/>
+  </ns1:operation>
+  <ns1:operation name="getSoTienDaThanhToan" qname="ns40:getSoTienDaThanhToan" returnQName="ns40:getSoTienDaThanhToanReturn" returnType="xsd:int" soapAction="" xmlns:ns40="http://dao" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns40:hoaDon" type="ns41:HoaDon" xmlns:ns41="http://model"/>
+  </ns1:operation>
+  <ns1:parameter name="allowedMethods" value="createThanhToanVnPay getByHoaDon getUrlVnPay getSoTienChuaThanhToan createThanhToanTienMat getSoTienDaThanhToan"/>
+  <ns1:parameter name="wsdlPortType" value="ThanhToanDAO"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="schemaQualified" value="http://dao,http://model"/>
+  <ns1:parameter name="wsdlServicePort" value="ThanhToanDAO"/>
+  <ns1:parameter name="className" value="dao.ThanhToanDAO"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://dao"/>
+  <ns1:parameter name="wsdlServiceElement" value="ThanhToanDAOService"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns42:DichVuNuoc" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:model.DichVuNuoc" xmlns:ns42="http://model"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns43:DichVuHopDong" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:model.DichVuHopDong" xmlns:ns43="http://model"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns44:HoaDon" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:model.HoaDon" xmlns:ns44="http://model"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns45:ThanhToan" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:model.ThanhToan" xmlns:ns45="http://model"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns46:BangGia" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:model.BangGia" xmlns:ns46="http://model"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns47:HopDong" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:model.HopDong" xmlns:ns47="http://model"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns48:PhuongThucThanhToan" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:model.PhuongThucThanhToan" xmlns:ns48="http://model"/>
+ </ns1:service>
+ <ns1:service name="Version" provider="java:RPC">
+  <ns1:parameter name="allowedMethods" value="getVersion"/>
+  <ns1:parameter name="className" value="org.apache.axis.Version"/>
+ </ns1:service>
+ <ns1:service name="KhachHangDAO" provider="java:RPC" style="wrapped" use="literal">
+  <ns1:operation name="getCanHoByKhachHang" qname="ns49:getCanHoByKhachHang" returnQName="ns49:getCanHoByKhachHangReturn" returnType="ns50:CanHo" soapAction="" xmlns:ns49="http://dao" xmlns:ns50="http://model">
+   <ns1:parameter qname="ns49:khachHang" type="ns50:KhachHang"/>
+  </ns1:operation>
+  <ns1:operation name="getKhachHangByTen" qname="ns51:getKhachHangByTen" returnQName="ns51:getKhachHangByTenReturn" returnType="ns52:KhachHang" soapAction="" xmlns:ns51="http://dao" xmlns:ns52="http://model">
+   <ns1:parameter qname="ns51:key" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:parameter name="allowedMethods" value="getKhachHangByTen getCanHoByKhachHang"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="wsdlPortType" value="KhachHangDAO"/>
+  <ns1:parameter name="className" value="dao.KhachHangDAO"/>
+  <ns1:parameter name="wsdlServicePort" value="KhachHangDAO"/>
+  <ns1:parameter name="schemaQualified" value="http://dao,http://model"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://dao"/>
+  <ns1:parameter name="wsdlServiceElement" value="KhachHangDAOService"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns53:KhachHang" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:model.KhachHang" xmlns:ns53="http://model"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns54:CanHo" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:model.CanHo" xmlns:ns54="http://model"/>
+ </ns1:service>
+ <ns1:service name="HoaDonDAO" provider="java:RPC" style="wrapped" use="literal">
+  <ns1:operation name="getHoaDonByDichVuHopDong" qname="ns55:getHoaDonByDichVuHopDong" returnQName="ns55:getHoaDonByDichVuHopDongReturn" returnType="ns56:HoaDon" soapAction="" xmlns:ns55="http://dao" xmlns:ns56="http://model">
+   <ns1:parameter qname="ns55:dichVuHopDong" type="ns56:DichVuHopDong"/>
+  </ns1:operation>
+  <ns1:operation name="getChiTietHoaDon" qname="ns57:getChiTietHoaDon" returnQName="ns57:getChiTietHoaDonReturn" returnType="ns58:MucLuyTienHoaDon" soapAction="" xmlns:ns57="http://dao" xmlns:ns58="http://model">
+   <ns1:parameter qname="ns57:hoaDon" type="ns58:HoaDon"/>
+  </ns1:operation>
+  <ns1:operation name="getLatestHoaDonByDichVuHopDong" qname="ns59:getLatestHoaDonByDichVuHopDong" returnQName="ns59:getLatestHoaDonByDichVuHopDongReturn" returnType="ns60:HoaDon" soapAction="" xmlns:ns59="http://dao" xmlns:ns60="http://model">
+   <ns1:parameter qname="ns59:dichVuHopDong" type="ns60:DichVuHopDong"/>
+  </ns1:operation>
+  <ns1:operation name="createHoaDon" qname="ns61:createHoaDon" returnQName="ns61:createHoaDonReturn" returnType="xsd:boolean" soapAction="" xmlns:ns61="http://dao" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns61:hoaDon" type="ns62:HoaDon" xmlns:ns62="http://model"/>
+  </ns1:operation>
+  <ns1:parameter name="allowedMethods" value="getLatestHoaDonByDichVuHopDong createHoaDon getChiTietHoaDon getHoaDonByDichVuHopDong"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="wsdlPortType" value="HoaDonDAO"/>
+  <ns1:parameter name="className" value="dao.HoaDonDAO"/>
+  <ns1:parameter name="wsdlServicePort" value="HoaDonDAO"/>
+  <ns1:parameter name="schemaQualified" value="http://dao,http://model"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://dao"/>
+  <ns1:parameter name="wsdlServiceElement" value="HoaDonDAOService"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns63:DichVuNuoc" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:model.DichVuNuoc" xmlns:ns63="http://model"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns64:DichVuHopDong" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:model.DichVuHopDong" xmlns:ns64="http://model"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns65:HoaDon" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:model.HoaDon" xmlns:ns65="http://model"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns66:MucLuyTienHoaDon" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:model.MucLuyTienHoaDon" xmlns:ns66="http://model"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns67:MucLuyTien" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:model.MucLuyTien" xmlns:ns67="http://model"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns68:HopDong" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:model.HopDong" xmlns:ns68="http://model"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns69:BangGia" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:model.BangGia" xmlns:ns69="http://model"/>
+ </ns1:service>
+ <ns1:transport name="http">
+  <ns1:requestFlow>
+   <ns1:handler type="URLMapper"/>
+   <ns1:handler type="java:org.apache.axis.handlers.http.HTTPAuthHandler"/>
+  </ns1:requestFlow>
+  <ns1:parameter name="qs:list" value="org.apache.axis.transport.http.QSListHandler"/>
+  <ns1:parameter name="qs:wsdl" value="org.apache.axis.transport.http.QSWSDLHandler"/>
+  <ns1:parameter name="qs.list" value="org.apache.axis.transport.http.QSListHandler"/>
+  <ns1:parameter name="qs.method" value="org.apache.axis.transport.http.QSMethodHandler"/>
+  <ns1:parameter name="qs:method" value="org.apache.axis.transport.http.QSMethodHandler"/>
+  <ns1:parameter name="qs.wsdl" value="org.apache.axis.transport.http.QSWSDLHandler"/>
+ </ns1:transport>
+ <ns1:transport name="local">
+  <ns1:responseFlow>
+   <ns1:handler type="LocalResponder"/>
+  </ns1:responseFlow>
+ </ns1:transport>
+</ns1:deployment>

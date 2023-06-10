@@ -1,0 +1,39 @@
+<nz-breadcrumb>
+  <nz-breadcrumb-item>Dịch vụ nước sạch</nz-breadcrumb-item>
+  <nz-breadcrumb-item>Danh sách</nz-breadcrumb-item>
+</nz-breadcrumb>
+<div class="inner-content">
+  <button nz-button nzType="primary" class="mb-2" routerLink="./create">
+    Tạo mới
+  </button>
+  <nz-table #basicTable [nzData]="data" [nzPageSize]="5">
+    <thead>
+      <tr>
+        <th>Mã</th>
+        <th>Tên dịch vụ</th>
+        <th>Ngày tạo</th>
+        <th>Ghi chú</th>
+        <th class="text-center">Hành động</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of basicTable.data">
+        <td>{{ data.id._text }}</td>
+        <td>{{ data.tenDichVu._text }}</td>
+        <td>{{ data.ngayTao._text | date : "dd/MM/yyyy" }}</td>
+        <td>{{ data.ghiChu._text }}</td>
+        <td class="text-center">
+          <button
+            nz-button
+            nzType="primary"
+            [routerLink]="'./detail/' + data.id._text"
+            nz-tooltip
+            nzTooltipTitle="Chỉnh sửa"
+          >
+            <span nz-icon nzType="edit"></span>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>

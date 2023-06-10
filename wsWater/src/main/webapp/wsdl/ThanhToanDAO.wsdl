@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://dao" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://dao" xmlns:intf="http://dao" xmlns:tns1="http://model" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://dao" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://model"/>
+   <element name="createThanhToanTienMat">
+    <complexType>
+     <sequence>
+      <element name="thanhToan" type="tns1:ThanhToan"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createThanhToanTienMatResponse">
+    <complexType>
+     <sequence>
+      <element name="createThanhToanTienMatReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getSoTienChuaThanhToan">
+    <complexType>
+     <sequence>
+      <element name="hoaDon" type="tns1:HoaDon"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getSoTienChuaThanhToanResponse">
+    <complexType>
+     <sequence>
+      <element name="getSoTienChuaThanhToanReturn" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createThanhToanVnPay">
+    <complexType>
+     <sequence>
+      <element name="thanhToan" type="tns1:ThanhToan"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createThanhToanVnPayResponse">
+    <complexType>
+     <sequence>
+      <element name="createThanhToanVnPayReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getByHoaDon">
+    <complexType>
+     <sequence>
+      <element name="hoaDon" type="tns1:HoaDon"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getByHoaDonResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getByHoaDonReturn" type="tns1:ThanhToan"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getUrlVnPay">
+    <complexType>
+     <sequence>
+      <element name="hoaDon" type="tns1:HoaDon"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getUrlVnPayResponse">
+    <complexType>
+     <sequence>
+      <element name="getUrlVnPayReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getSoTienDaThanhToan">
+    <complexType>
+     <sequence>
+      <element name="hoaDon" type="tns1:HoaDon"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getSoTienDaThanhToanResponse">
+    <complexType>
+     <sequence>
+      <element name="getSoTienDaThanhToanReturn" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://model" xmlns="http://www.w3.org/2001/XMLSchema">
+   <complexType name="DichVuNuoc">
+    <sequence>
+     <element name="ghiChu" nillable="true" type="xsd:string"/>
+     <element name="id" nillable="true" type="xsd:int"/>
+     <element name="ngayTao" nillable="true" type="xsd:dateTime"/>
+     <element name="tenDichVu" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="BangGia">
+    <sequence>
+     <element name="dichVu" nillable="true" type="tns1:DichVuNuoc"/>
+     <element name="id" nillable="true" type="xsd:int"/>
+     <element name="ngayTao" nillable="true" type="xsd:dateTime"/>
+    </sequence>
+   </complexType>
+   <complexType name="HopDong">
+    <sequence>
+     <element name="denNgay" nillable="true" type="xsd:dateTime"/>
+     <element name="id" nillable="true" type="xsd:int"/>
+     <element name="tuNgay" nillable="true" type="xsd:dateTime"/>
+    </sequence>
+   </complexType>
+   <complexType name="DichVuHopDong">
+    <sequence>
+     <element name="dichVuNuoc" nillable="true" type="tns1:DichVuNuoc"/>
+     <element name="hopDong" nillable="true" type="tns1:HopDong"/>
+     <element name="id" nillable="true" type="xsd:int"/>
+    </sequence>
+   </complexType>
+   <complexType name="HoaDon">
+    <sequence>
+     <element name="bangGia" nillable="true" type="tns1:BangGia"/>
+     <element name="chiSoDongHo" nillable="true" type="xsd:int"/>
+     <element name="chiSoTieuThu" nillable="true" type="xsd:int"/>
+     <element name="dichVuHopDong" nillable="true" type="tns1:DichVuHopDong"/>
+     <element name="id" nillable="true" type="xsd:int"/>
+     <element name="ngayTao" nillable="true" type="xsd:dateTime"/>
+     <element name="soTien" nillable="true" type="xsd:int"/>
+     <element name="soTienDaThanhToan" nillable="true" type="xsd:int"/>
+    </sequence>
+   </complexType>
+   <complexType abstract="true" name="PhuongThucThanhToan">
+    <sequence/>
+   </complexType>
+   <complexType name="ThanhToan">
+    <sequence>
+     <element name="hoaDon" nillable="true" type="tns1:HoaDon"/>
+     <element name="id" nillable="true" type="xsd:int"/>
+     <element name="ngayThanhToan" nillable="true" type="xsd:dateTime"/>
+     <element name="phuongThuc" nillable="true" type="tns1:PhuongThucThanhToan"/>
+     <element name="phuongThucThanhToan" nillable="true" type="xsd:string"/>
+     <element name="soTien" nillable="true" type="xsd:int"/>
+     <element name="urlThanhToan" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="getUrlVnPayResponse">
+
+      <wsdl:part element="impl:getUrlVnPayResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="createThanhToanTienMatResponse">
+
+      <wsdl:part element="impl:createThanhToanTienMatResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="createThanhToanVnPayResponse">
+
+      <wsdl:part element="impl:createThanhToanVnPayResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getByHoaDonResponse">
+
+      <wsdl:part element="impl:getByHoaDonResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="createThanhToanVnPayRequest">
+
+      <wsdl:part element="impl:createThanhToanVnPay" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="createThanhToanTienMatRequest">
+
+      <wsdl:part element="impl:createThanhToanTienMat" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getUrlVnPayRequest">
+
+      <wsdl:part element="impl:getUrlVnPay" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getSoTienDaThanhToanResponse">
+
+      <wsdl:part element="impl:getSoTienDaThanhToanResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getSoTienChuaThanhToanResponse">
+
+      <wsdl:part element="impl:getSoTienChuaThanhToanResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getSoTienDaThanhToanRequest">
+
+      <wsdl:part element="impl:getSoTienDaThanhToan" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getSoTienChuaThanhToanRequest">
+
+      <wsdl:part element="impl:getSoTienChuaThanhToan" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getByHoaDonRequest">
+
+      <wsdl:part element="impl:getByHoaDon" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="ThanhToanDAO">
+
+      <wsdl:operation name="createThanhToanTienMat">
+
+         <wsdl:input message="impl:createThanhToanTienMatRequest" name="createThanhToanTienMatRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:createThanhToanTienMatResponse" name="createThanhToanTienMatResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getSoTienChuaThanhToan">
+
+         <wsdl:input message="impl:getSoTienChuaThanhToanRequest" name="getSoTienChuaThanhToanRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getSoTienChuaThanhToanResponse" name="getSoTienChuaThanhToanResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createThanhToanVnPay">
+
+         <wsdl:input message="impl:createThanhToanVnPayRequest" name="createThanhToanVnPayRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:createThanhToanVnPayResponse" name="createThanhToanVnPayResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getByHoaDon">
+
+         <wsdl:input message="impl:getByHoaDonRequest" name="getByHoaDonRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getByHoaDonResponse" name="getByHoaDonResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getUrlVnPay">
+
+         <wsdl:input message="impl:getUrlVnPayRequest" name="getUrlVnPayRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getUrlVnPayResponse" name="getUrlVnPayResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getSoTienDaThanhToan">
+
+         <wsdl:input message="impl:getSoTienDaThanhToanRequest" name="getSoTienDaThanhToanRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getSoTienDaThanhToanResponse" name="getSoTienDaThanhToanResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="ThanhToanDAOSoapBinding" type="impl:ThanhToanDAO">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="createThanhToanTienMat">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="createThanhToanTienMatRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="createThanhToanTienMatResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getSoTienChuaThanhToan">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getSoTienChuaThanhToanRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getSoTienChuaThanhToanResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createThanhToanVnPay">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="createThanhToanVnPayRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="createThanhToanVnPayResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getByHoaDon">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getByHoaDonRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getByHoaDonResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getUrlVnPay">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getUrlVnPayRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getUrlVnPayResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getSoTienDaThanhToan">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getSoTienDaThanhToanRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getSoTienDaThanhToanResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="ThanhToanDAOService">
+
+      <wsdl:port binding="impl:ThanhToanDAOSoapBinding" name="ThanhToanDAO">
+
+         <wsdlsoap:address location="http://localhost:8080/wsWater/services/ThanhToanDAO"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

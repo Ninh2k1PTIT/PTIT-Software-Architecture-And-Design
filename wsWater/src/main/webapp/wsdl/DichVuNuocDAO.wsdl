@@ -1,0 +1,673 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://dao" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://dao" xmlns:intf="http://dao" xmlns:tns1="http://model" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://dao" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://model"/>
+   <element name="getAllDichVu">
+    <complexType/>
+   </element>
+   <element name="getAllDichVuResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getAllDichVuReturn" type="tns1:DichVuNuoc"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="saveBangGia">
+    <complexType>
+     <sequence>
+      <element name="bangGia" type="tns1:BangGia"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="saveBangGiaResponse">
+    <complexType>
+     <sequence>
+      <element name="saveBangGiaReturn" type="xsd:long"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createDichVu">
+    <complexType>
+     <sequence>
+      <element name="dichVu" type="tns1:DichVuNuoc"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createDichVuResponse">
+    <complexType>
+     <sequence>
+      <element name="createDichVuReturn" type="xsd:long"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getDichVu">
+    <complexType>
+     <sequence>
+      <element name="dichVuNuoc" type="tns1:DichVuNuoc"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getDichVuResponse">
+    <complexType>
+     <sequence>
+      <element name="getDichVuReturn" type="tns1:DichVuNuoc"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="updateDichVu">
+    <complexType>
+     <sequence>
+      <element name="dichVu" type="tns1:DichVuNuoc"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="updateDichVuResponse">
+    <complexType>
+     <sequence>
+      <element name="updateDichVuReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="saveMucLuyTiens">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="mucLuyTiens" type="tns1:MucLuyTien"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="saveMucLuyTiensResponse">
+    <complexType>
+     <sequence>
+      <element name="saveMucLuyTiensReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getDichVuByCanHo">
+    <complexType>
+     <sequence>
+      <element name="canHo" type="tns1:CanHo"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getDichVuByCanHoResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getDichVuByCanHoReturn" type="tns1:DichVuHopDong"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getAllMucLuyTienByBangGia">
+    <complexType>
+     <sequence>
+      <element name="bangGia" type="tns1:BangGia"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getAllMucLuyTienByBangGiaResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getAllMucLuyTienByBangGiaReturn" type="tns1:MucLuyTien"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getAllBangGiaByDichVu">
+    <complexType>
+     <sequence>
+      <element name="dichVu" type="tns1:DichVuNuoc"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getAllBangGiaByDichVuResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getAllBangGiaByDichVuReturn" type="tns1:BangGia"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getLatestBangGiaByDichVu">
+    <complexType>
+     <sequence>
+      <element name="dichVu" type="tns1:DichVuNuoc"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getLatestBangGiaByDichVuResponse">
+    <complexType>
+     <sequence>
+      <element name="getLatestBangGiaByDichVuReturn" type="tns1:BangGia"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://model" xmlns="http://www.w3.org/2001/XMLSchema">
+   <complexType name="DichVuNuoc">
+    <sequence>
+     <element name="ghiChu" nillable="true" type="xsd:string"/>
+     <element name="id" nillable="true" type="xsd:int"/>
+     <element name="ngayTao" nillable="true" type="xsd:dateTime"/>
+     <element name="tenDichVu" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="BangGia">
+    <sequence>
+     <element name="dichVu" nillable="true" type="tns1:DichVuNuoc"/>
+     <element name="id" nillable="true" type="xsd:int"/>
+     <element name="ngayTao" nillable="true" type="xsd:dateTime"/>
+    </sequence>
+   </complexType>
+   <complexType name="MucLuyTien">
+    <sequence>
+     <element name="bangGia" nillable="true" type="tns1:BangGia"/>
+     <element name="donGia" nillable="true" type="xsd:int"/>
+     <element name="ghiChu" nillable="true" type="xsd:string"/>
+     <element name="gioiHan" nillable="true" type="xsd:int"/>
+     <element name="id" nillable="true" type="xsd:int"/>
+    </sequence>
+   </complexType>
+   <complexType name="CanHo">
+    <sequence>
+     <element name="diaChi" nillable="true" type="xsd:string"/>
+     <element name="id" nillable="true" type="xsd:int"/>
+    </sequence>
+   </complexType>
+   <complexType name="HopDong">
+    <sequence>
+     <element name="denNgay" nillable="true" type="xsd:dateTime"/>
+     <element name="id" nillable="true" type="xsd:int"/>
+     <element name="tuNgay" nillable="true" type="xsd:dateTime"/>
+    </sequence>
+   </complexType>
+   <complexType name="DichVuHopDong">
+    <sequence>
+     <element name="dichVuNuoc" nillable="true" type="tns1:DichVuNuoc"/>
+     <element name="hopDong" nillable="true" type="tns1:HopDong"/>
+     <element name="id" nillable="true" type="xsd:int"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="updateDichVuRequest">
+
+      <wsdl:part element="impl:updateDichVu" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAllDichVuRequest">
+
+      <wsdl:part element="impl:getAllDichVu" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAllDichVuResponse">
+
+      <wsdl:part element="impl:getAllDichVuResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAllBangGiaByDichVuRequest">
+
+      <wsdl:part element="impl:getAllBangGiaByDichVu" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getLatestBangGiaByDichVuResponse">
+
+      <wsdl:part element="impl:getLatestBangGiaByDichVuResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="saveMucLuyTiensResponse">
+
+      <wsdl:part element="impl:saveMucLuyTiensResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getLatestBangGiaByDichVuRequest">
+
+      <wsdl:part element="impl:getLatestBangGiaByDichVu" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="saveBangGiaRequest">
+
+      <wsdl:part element="impl:saveBangGia" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getDichVuRequest">
+
+      <wsdl:part element="impl:getDichVu" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="createDichVuResponse">
+
+      <wsdl:part element="impl:createDichVuResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="saveMucLuyTiensRequest">
+
+      <wsdl:part element="impl:saveMucLuyTiens" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getDichVuResponse">
+
+      <wsdl:part element="impl:getDichVuResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="updateDichVuResponse">
+
+      <wsdl:part element="impl:updateDichVuResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="createDichVuRequest">
+
+      <wsdl:part element="impl:createDichVu" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getDichVuByCanHoRequest">
+
+      <wsdl:part element="impl:getDichVuByCanHo" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAllMucLuyTienByBangGiaRequest">
+
+      <wsdl:part element="impl:getAllMucLuyTienByBangGia" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAllMucLuyTienByBangGiaResponse">
+
+      <wsdl:part element="impl:getAllMucLuyTienByBangGiaResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getDichVuByCanHoResponse">
+
+      <wsdl:part element="impl:getDichVuByCanHoResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAllBangGiaByDichVuResponse">
+
+      <wsdl:part element="impl:getAllBangGiaByDichVuResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="saveBangGiaResponse">
+
+      <wsdl:part element="impl:saveBangGiaResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="DichVuNuocDAO">
+
+      <wsdl:operation name="getAllDichVu">
+
+         <wsdl:input message="impl:getAllDichVuRequest" name="getAllDichVuRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getAllDichVuResponse" name="getAllDichVuResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="saveBangGia">
+
+         <wsdl:input message="impl:saveBangGiaRequest" name="saveBangGiaRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:saveBangGiaResponse" name="saveBangGiaResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createDichVu">
+
+         <wsdl:input message="impl:createDichVuRequest" name="createDichVuRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:createDichVuResponse" name="createDichVuResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getDichVu">
+
+         <wsdl:input message="impl:getDichVuRequest" name="getDichVuRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getDichVuResponse" name="getDichVuResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="updateDichVu">
+
+         <wsdl:input message="impl:updateDichVuRequest" name="updateDichVuRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:updateDichVuResponse" name="updateDichVuResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="saveMucLuyTiens">
+
+         <wsdl:input message="impl:saveMucLuyTiensRequest" name="saveMucLuyTiensRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:saveMucLuyTiensResponse" name="saveMucLuyTiensResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getDichVuByCanHo">
+
+         <wsdl:input message="impl:getDichVuByCanHoRequest" name="getDichVuByCanHoRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getDichVuByCanHoResponse" name="getDichVuByCanHoResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAllMucLuyTienByBangGia">
+
+         <wsdl:input message="impl:getAllMucLuyTienByBangGiaRequest" name="getAllMucLuyTienByBangGiaRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getAllMucLuyTienByBangGiaResponse" name="getAllMucLuyTienByBangGiaResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAllBangGiaByDichVu">
+
+         <wsdl:input message="impl:getAllBangGiaByDichVuRequest" name="getAllBangGiaByDichVuRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getAllBangGiaByDichVuResponse" name="getAllBangGiaByDichVuResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getLatestBangGiaByDichVu">
+
+         <wsdl:input message="impl:getLatestBangGiaByDichVuRequest" name="getLatestBangGiaByDichVuRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getLatestBangGiaByDichVuResponse" name="getLatestBangGiaByDichVuResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="DichVuNuocDAOSoapBinding" type="impl:DichVuNuocDAO">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="getAllDichVu">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getAllDichVuRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getAllDichVuResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="saveBangGia">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="saveBangGiaRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="saveBangGiaResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createDichVu">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="createDichVuRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="createDichVuResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getDichVu">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getDichVuRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getDichVuResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="updateDichVu">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="updateDichVuRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="updateDichVuResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="saveMucLuyTiens">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="saveMucLuyTiensRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="saveMucLuyTiensResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getDichVuByCanHo">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getDichVuByCanHoRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getDichVuByCanHoResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAllMucLuyTienByBangGia">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getAllMucLuyTienByBangGiaRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getAllMucLuyTienByBangGiaResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAllBangGiaByDichVu">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getAllBangGiaByDichVuRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getAllBangGiaByDichVuResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getLatestBangGiaByDichVu">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getLatestBangGiaByDichVuRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getLatestBangGiaByDichVuResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="DichVuNuocDAOService">
+
+      <wsdl:port binding="impl:DichVuNuocDAOSoapBinding" name="DichVuNuocDAO">
+
+         <wsdlsoap:address location="http://localhost:8080/wsWater/services/DichVuNuocDAO"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>
